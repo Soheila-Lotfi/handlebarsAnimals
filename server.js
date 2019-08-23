@@ -55,12 +55,21 @@ app.get("/all-pets", function(req, res) {
     }
   }
 
-  res.render("index", { allPets: allPets });
+  res.render("index", { all: allPets });
 });
 
 app.get("/all-non-pets", function(req, res) {
   // Handlebars requires an object to be sent to the index.handlebars file.
   // 3. Send all the animals that are not pets to the index.handlebars file.
+
+  var allNonPets = [];
+  for (i = 0; i < animals.length; i++) {
+    if (!animals[i].pet) {
+      allNonPets.push(animals[i]);
+    }
+  }
+
+  res.render("index", { all: allNonPets });
 });
 
 // Start our server so that it can begin listening to client requests.
